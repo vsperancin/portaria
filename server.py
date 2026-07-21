@@ -23,7 +23,7 @@ STATIC = ROOT / "static"
 
 DB_DSN = os.environ.get(
     "PORTARIA_DSN",
-    "",  # fallback uses kwargs below
+    "host=p236y4fw7va4180f8yqd3o7u port=5432 dbname=portaria user=portaria password=_nDiIGt3Y4lS9m40RUrePLkWNmA",  # fallback Coolify internal
 )
 
 
