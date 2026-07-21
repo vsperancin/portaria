@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portaria · Cadastros</title>
+<link rel="stylesheet" href="/static/admin.css" />
+</head>
+<body class="admin-body">
+<header class="topbar">
+  <div class="brand">
+    <div class="dot"></div>
+    <h1>Portaria VinIA <span class="muted">· cadastros</span></h1>
+  </div>
+  <nav class="actions">
+    <a href="/" class="btn-ghost">+ Novo cadastro</a>
+    <button id="exportCsv" class="btn-primary">Exportar CSV</button>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="cards">
+    <div class="card stat">
+      <div class="stat-label">Total cadastros</div>
+      <div class="stat-value" id="statTotal">—</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-label">Hoje</div>
+      <div class="stat-value" id="statToday">—</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-label">Últimos 7 dias</div>
+      <div class="stat-value" id="statWeek">—</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-label">CPFs únicos</div>
+      <div class="stat-value" id="statUnique">—</div>
+    </div>
+  </section>
+
+  <section class="toolbar">
+    <input id="search" type="search" placeholder="Buscar por nome, telefone ou CPF…" autocomplete="off" />
+    <select id="perPage">
+      <option value="10">10 / pág</option>
+      <option value="25" selected>25 / pág</option>
+      <option value="50">50 / pág</option>
+      <option value="100">100 / pág</option>
+    </select>
+    <span class="muted" id="showing">—</span>
+  </section>
+
+  <section class="table-wrap">
+    <table class="grid">
+      <thead>
+        <tr>
+          <th class="sortable" data-key="id">#</th>
+          <th class="sortable" data-key="nome">Nome</th>
+          <th class="sortable" data-key="telefone">Telefone</th>
+          <th class="sortable" data-key="cpf">CPF</th>
+          <th class="sortable" data-key="created_at">Cadastrado em</th>
+        </tr>
+      </thead>
+      <tbody id="rows">
+        <tr><td colspan="5" class="empty">carregando…</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="pager">
+    <button id="prev" class="btn-ghost">← Anterior</button>
+    <span id="pageInfo" class="muted">página 1 / 1</span>
+    <button id="next" class="btn-ghost">Próxima →</button>
+  </section>
+</main>
+
+<script src="/static/admin.js"></script>
+</body>
+</html>

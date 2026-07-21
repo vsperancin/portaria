@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portaria · VinIA</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="portaria-body">
+
+<!-- Fundo: corredor + catraca -->
+<div class="lobby">
+  <div class="floor"></div>
+  <div class="ceiling-light"></div>
+  <div class="ceiling-light light-2"></div>
+
+  <!-- Catraca (central) -->
+  <div class="turnstile" id="turnstile">
+    <div class="turnstile-base"></div>
+    <div class="turnstile-arm" id="arm"></div>
+    <div class="turnstile-base base-2"></div>
+    <div class="turnstile-led" id="led"></div>
+    <div class="turnstile-screen" id="tScreen">AGUARDANDO</div>
+  </div>
+
+  <!-- Crachá que desliza -->
+  <div class="badge-card" id="badge">
+    <div class="badge-strap"></div>
+    <div class="badge-photo">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="24" r="12" fill="#1a73e8"/>
+        <path d="M10 56c4-12 14-16 22-16s18 4 22 16" fill="#1a73e8"/>
+      </svg>
+    </div>
+    <div class="badge-info">
+      <div class="badge-line" id="bLine1">Bem-vindo</div>
+      <div class="badge-line big" id="bLine2">—</div>
+      <div class="badge-line small" id="bLine3">aguardando...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Formulário -->
+<main class="form-wrap">
+  <div class="form-card" id="formCard">
+    <h1>Portaria VinIA</h1>
+    <p class="subtitle">Cadastro de entrada · preencha seus dados</p>
+
+    <form id="form" autocomplete="off" novalidate>
+      <label class="field">
+        <span>Nome completo</span>
+        <input id="nome" name="nome" type="text" placeholder="Ex: Maria Silva" required minlength="3" />
+      </label>
+
+      <label class="field">
+        <span>Telefone</span>
+        <input id="telefone" name="telefone" type="tel" inputmode="numeric"
+               placeholder="(11) 98765-4321" maxlength="15" required />
+      </label>
+
+      <label class="field">
+        <span>CPF</span>
+        <input id="cpf" name="cpf" type="text" inputmode="numeric"
+               placeholder="000.000.000-00" maxlength="14" required />
+      </label>
+
+      <button type="submit" id="submit">
+        <span class="btn-label">Passar crachá</span>
+        <span class="btn-spin" aria-hidden="true"></span>
+      </button>
+
+      <p class="error" id="error" hidden></p>
+    </form>
+  </div>
+</main>
+
+<!-- Confete (sucesso) -->
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+<script src="/static/script.js"></script>
+</body>
+</html>

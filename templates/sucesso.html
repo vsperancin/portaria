@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cadastro realizado · Portaria VinIA</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="portaria-body success">
+<div class="lobby success-bg">
+  <div class="floor"></div>
+  <div class="turnstile open">
+    <div class="turnstile-base"></div>
+    <div class="turnstile-arm"></div>
+    <div class="turnstile-base base-2"></div>
+    <div class="turnstile-led on"></div>
+    <div class="turnstile-screen">LIBERADO</div>
+  </div>
+</div>
+
+<main class="form-wrap">
+  <div class="form-card success-card">
+    <div class="check">✓</div>
+    <h1>Pronto!</h1>
+    <p class="subtitle">Cadastro realizado com sucesso.</p>
+    <p class="subtitle small">Pode passar, bem-vindo(a).</p>
+    <a href="/" class="btn-secondary">Novo cadastro</a>
+  </div>
+</main>
+
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+<script src="/static/script.js"></script>
+<script>window.addEventListener('load', () => fireConfetti(2200));</script>
+</body>
+</html>
