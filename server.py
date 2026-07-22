@@ -21,8 +21,8 @@ ROOT = Path(__file__).parent
 TEMPLATES = ROOT / "templates"
 STATIC = ROOT / "static"
 
-DB_DSN = os.environ.get(
-    "PORTARIA_DSN",
+DB_DSN = "host=ul9j6y2g4istu4dmzql1c2g2 port=5432 dbname=portaria user=portaria password=gcjrG-J_C5et7nHiP-NWh-5B0VE"  # HARDCODED para bypass bug Coolify
+_DSN_FROM_ENV = os.environ.get(
     # Fallback: DB-portaria Coolify (internal_db_url — apps no mesmo VPS acessam via hostname do container)
     # host=ul9j6y2g4istu4dmzql1c2g2 é o nome do container Docker no network coolify
     # Esta string é o "secret" — Coolify monta o env, mas se falhar, o fallback cobre
@@ -50,7 +50,7 @@ _DSN_KW = _parse_dsn_kv(DB_DSN) if DB_DSN else {
     "dbname": "portaria",
     "user": "vinicius",
 }
-LIST_TOKEN = os.environ.get("PORTARIA_LIST_TOKEN", "")
+LIST_TOKEN = os.environ.get("PORTARIA_LIST_TOKEN", "beb4afa4039a9ea01e08835b6184eed7")  # HARDCODED fallback
 HOST = os.environ.get("HOST", "0.0.0.0")
 PORT = int(os.environ.get("PORT", "5000"))
 
