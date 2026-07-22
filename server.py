@@ -23,7 +23,9 @@ STATIC = ROOT / "static"
 
 DB_DSN = os.environ.get(
     "PORTARIA_DSN",
-    "host=p236y4fw7va4180f8yqd3o7u port=5432 dbname=portaria user=portaria password=_nDiIGt3Y4lS9m40RUrePLkWNmA",  # fallback Coolify internal
+    # Fallback: DB-portaria Coolify (internal_db_url — apps no mesmo VPS acessam via hostname do container)
+    # host=ul9j6y2g4istu4dmzql1c2g2 é o nome do container Docker no network coolify
+    "host=ul9j6y2g4istu4dmzql1c2g2 port=5432 dbname=portaria user=portaria password=gcjrG-J_C5et7nHiP-NWh-5B0VE",
 )
 
 
