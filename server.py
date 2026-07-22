@@ -21,36 +21,30 @@ ROOT = Path(__file__).parent
 TEMPLATES = ROOT / "templates"
 STATIC = ROOT / "static"
 
-DB_DSN = "host=ul9j6y2g4istu4dmzql1c2g2 port=5432 dbname=portaria user=portaria password=gcjrG-J_C5et7nHiP-NWh-5B0VE"  # HARDCODED para bypass bug Coolify
-_DSN_FROM_ENV = os.environ.get(
-    # Fallback: DB-portaria Coolify (internal_db_url — apps no mesmo VPS acessam via hostname do container)
-    # host=ul9j6y2g4istu4dmzql1c2g2 é o nome do container Docker no network coolify
-    # Esta string é o "secret" — Coolify monta o env, mas se falhar, o fallback cobre
-    "host=ul9j6y2g4istu4dmzql1c2g2 port=5432 dbname=portaria user=portaria password=gcjrG-J_C5et7nHiP-NWh-5B0VE",
-)
+# DATABASE_KEY: postgres://user:password@host:port/dbname (vem do Coolify como secret)
+DATABASE_KEY = os.environ.get("DATABASE_KEY", "")
 
 
-def _parse_dsn_kv(dsn: str) -> dict:
-    """psycopg2 parse_dsn but preserves 'options' as one value (not re-split)."""
-    out = {}
-    if not dsn:
-        return out
-    for part in dsn.split():
-        if "=" not in part:
-            continue
-        k, v = part.split("=", 1)
-        out[k.strip()] = v.strip()
-    return out
+def _parse_database_url(url: str) -> dict:
+    """Parse postgres:// URL → psycopg2 kwargs. Empty dict se URL inválida."""
+    if not url or not url.startswith(("postgres://", "postgresql://")):
+        return {}
+    from urllib.parse import urlparse
+    p = urlparse(url)
+    if not p.hostname:
+        return {}
+    return {
+        "host": p.hostname,
+        "port": str(p.port or 5432),
+        "dbname": (p.path or "/").lstrip("/") or "postgres",
+        "user": p.username or "",
+        "password": p.password or "",
+    }
 
 
-# Parse DSN once at import time; use kwargs so 'options' stays one value
-_DSN_KW = _parse_dsn_kv(DB_DSN) if DB_DSN else {
-    "host": "/var/run/postgresql",
-    "port": "5432",
-    "dbname": "portaria",
-    "user": "vinicius",
-}
-LIST_TOKEN = os.environ.get("PORTARIA_LIST_TOKEN", "beb4afa4039a9ea01e08835b6184eed7")  # HARDCODED fallback
+# Parse once at import time
+_DSN_KW = _parse_database_url(DATABASE_KEY)
+LIST_TOKEN = os.environ.get("PORTARIA_LIST_TOKEN", "")
 HOST = os.environ.get("HOST", "0.0.0.0")
 PORT = int(os.environ.get("PORT", "5000"))
 
@@ -143,6 +137,8 @@ def db_connect():
         f"dbname={_DSN_KW.get('dbname', '')}",
         f"user={_DSN_KW.get('user', '')}",
     ]
+    if _DSN_KW.get("password"):
+        parts.append(f"password={_DSN_KW['password']}")
     dsn = " ".join(parts)
     conn = psycopg2.connect(dsn)
     # Force search_path to public (avoids any per-user default issues).
