@@ -10,9 +10,10 @@ COPY server.py .
 COPY templates/ templates/
 COPY static/ static/
 
-# Railway/Coolify injetam PORT automaticamente
+# Railway/Coolify injetam PORT automaticamente — padrão Vinicius = 5000
 ENV HOST=0.0.0.0
-EXPOSE 8000
+ENV PORT=5000
+EXPOSE 5000
 
 # Postgres via TCP no mesmo Docker network do Coolify (hostname do container)
 # Se PORTARIA_DSN não vier via env Coolify, usa o internal_db_url (apps no mesmo VPS)

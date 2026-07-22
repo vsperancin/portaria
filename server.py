@@ -51,7 +51,7 @@ _DSN_KW = _parse_dsn_kv(DB_DSN) if DB_DSN else {
 }
 LIST_TOKEN = os.environ.get("PORTARIA_LIST_TOKEN", "")
 HOST = os.environ.get("HOST", "0.0.0.0")
-PORT = int(os.environ.get("PORT", "8104"))
+PORT = int(os.environ.get("PORT", "5000"))
 
 CONTENT_TYPES = {
     ".html": "text/html; charset=utf-8",
