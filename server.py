@@ -25,6 +25,7 @@ DB_DSN = os.environ.get(
     "PORTARIA_DSN",
     # Fallback: DB-portaria Coolify (internal_db_url — apps no mesmo VPS acessam via hostname do container)
     # host=ul9j6y2g4istu4dmzql1c2g2 é o nome do container Docker no network coolify
+    # Esta string é o "secret" — Coolify monta o env, mas se falhar, o fallback cobre
     "host=ul9j6y2g4istu4dmzql1c2g2 port=5432 dbname=portaria user=portaria password=gcjrG-J_C5et7nHiP-NWh-5B0VE",
 )
 
